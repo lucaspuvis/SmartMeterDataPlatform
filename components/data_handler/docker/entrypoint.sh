@@ -1,1 +1,3 @@
-python data_handler.py
+#!/bin/bash
+
+python -u data_handler/data_handler.py

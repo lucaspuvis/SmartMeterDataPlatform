@@ -1,6 +1,8 @@
 FROM python:3.8-slim
 
-ADD components/data_handler components/data_handler
-RUN pip3 install -r components/data_handler/requirements.txt
+COPY components/data_handler/ data_handler/
+COPY components/data_handler/docker/entrypoint.sh .
 
-ENTRYPOINT [ "entrypoint.sh" ]
+RUN pip3 install -r data_handler/requirements.txt
+
+ENTRYPOINT [ "./entrypoint.sh" ]
