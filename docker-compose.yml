@@ -1,0 +1,27 @@
+version: "1"
+services:
+  
+    influxdb:
+        image: influxdb:latest
+        container_name: influxdb
+        ports:
+            - "8083:8083"
+            - "8086:8086"
+            - "8090:8090"
+            env_file:
+                - 'env.influxdb'
+                volumes:
+                    # Data persistency
+                    # sudo mkdir -p /srv/docker/influxdb/data
+                    - /srv/docker/influxdb/data:/var/lib/influxdb
+                    
+    datahandler:    
+        image: data_handler:latest
+        depends_on:
+            - influxdb
+        environment:
+            ADDRESS: "influx.itu.dk"
+            PORT: "8883"
+            USER: "smartreader"
+            PASSWORD: "4mp3r3h0ur"
+            TOPIC: "IoT2020sec/meters"
