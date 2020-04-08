@@ -37,7 +37,7 @@ def get_env_vars():
         "user": "smartreader",
         "pass": "4mp3r3h0ur",
         "topic": "IoT2020sec/meters",
-        "dbhost": "localhost",
+        "dbhost": "influxdb",
         "dbport": "8086"
     }
     return env
@@ -127,7 +127,7 @@ def connect(env):
 if __name__ == "__main__":
     env = get_env_vars()
     dbclient = InfluxDBClient(host=env["dbhost"], port=int(env["dbport"]))
-    dbclient.create_database('pyexample')
-    dbclient.switch_database('pyexample')
+    dbclient.create_database('smartmeters')
+    dbclient.switch_database('smartmeters')
     connect(env)
 

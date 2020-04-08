@@ -12,25 +12,19 @@ services:
             # Data persistency
             # sudo mkdir -p /srv/docker/influxdb/data
             - /srv/docker/influxdb/data:/var/lib/influxdb
-        healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost:8083"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
                     
-    # datahandler:    
-    #     build: 
-    #         context: .
-    #         dockerfile: components/data_handler/docker/Dockerfile
-    #     # image: data_handler:staging
-    #     restart: on-failure
-    #     depends_on:
-    #         - influxdb
-    #     environment:
-    #         ADDRESS: "influx.itu.dk"
-    #         PORT: "9001"
-    #         USER: "smartreader"
-    #         PASSWORD: "4mp3r3h0ur"
-    #         TOPIC: "IoT2020sec/meters"
-    #         DBHOST: "localhost"
-    #         DBPORT: "8086"
+    datahandler:    
+        build: 
+            context: .
+            dockerfile: components/data_handler/docker/Dockerfile
+        # image: data_handler:staging
+        depends_on:
+            - influxdb
+        environment:
+            ADDRESS: "influx.itu.dk"
+            PORT: "9001"
+            USER: "smartreader"
+            PASSWORD: "4mp3r3h0ur"
+            TOPIC: "IoT2020sec/meters"
+            DBHOST: "influxdb"
+            DBPORT: "8086"
