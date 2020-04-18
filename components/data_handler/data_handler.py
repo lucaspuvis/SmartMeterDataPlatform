@@ -127,7 +127,7 @@ def connect(env):
 if __name__ == "__main__":
     env = get_env_vars()
     dbclient = InfluxDBClient(host=env["dbhost"], port=int(env["dbport"]))
-    dbclient.create_database('smartmeters')
-    dbclient.switch_database('smartmeters')
+    dbclient.create_database('pyexample')
+    dbclient.switch_database('pyexample')
     connect(env)
 
