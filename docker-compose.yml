@@ -12,7 +12,26 @@ services:
             # Data persistency
             # sudo mkdir -p /srv/docker/influxdb/data
             - /srv/docker/influxdb/data:/var/lib/influxdb
-                    
+    
+    grafana:
+        image: grafana/grafana:latest
+        container_name: grafana
+        ports:
+            - "25565:25565"
+        expose:
+            - "25565"
+        # env_file: 
+        #     - 'env.grafana'
+        user: "0"
+        links:
+            - influxdb
+        volumes:
+            # Data persistency
+            # sudo mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
+            - ./config/grafana.ini:/etc/grafana/grafana.ini
+            - /srv/docker/grafana/data:/var/lib/grafana
+
+
     datahandler:    
         build: 
             context: .
