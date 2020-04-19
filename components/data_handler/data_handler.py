@@ -21,25 +21,16 @@ def get_env_vars():
     Returns:
     dict: A dictionary with address, port, user, pass and topic.
     '''
-    # env = {
-    #     "address": os.getenv("ADDRESS"),
-    #     "port": os.getenv("PORT"),
-    #     "user": os.getenv("USER"),
-    #     "pass": os.getenv("PASSWORD"),
-    #     "topic": os.getenv("TOPIC"),
-    #     "dbhost": os.getenv("DBHOST"),
-    #     "dbport": os.getenv("DBPORT")
-    # }
-
     env = {
-        "address": "influx.itu.dk",
-        "port": 9001,
-        "user": "smartreader",
-        "pass": "4mp3r3h0ur",
-        "topic": "IoT2020sec/meters",
-        "dbhost": "influxdb",
-        "dbport": "8086"
+        "address": os.getenv("ADDRESS"),
+        "port": os.getenv("PORT"),
+        "user": os.getenv("USER"),
+        "pass": os.getenv("PASSWORD"),
+        "topic": os.getenv("TOPIC"),
+        "dbhost": os.getenv("DBHOST"),
+        "dbport": os.getenv("DBPORT")
     }
+
     return env
 
 
