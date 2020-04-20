@@ -30,21 +30,21 @@ services:
             - /srv/docker/grafana/data:/var/lib/grafana
 
 
-    # datahandler:    
-    #     build: 
-    #         context: .
-    #         dockerfile: components/data_handler/docker/Dockerfile
-    #     # image: data_handler:staging
-    #     depends_on:
-    #         - influxdb
-    #     environment:
-    #         ADDRESS: "influx.itu.dk"
-    #         PORT: "9001"
-    #         USER: "smartreader"
-    #         PASSWORD: "4mp3r3h0ur"
-    #         TOPIC: "IoT2020sec/meters"
-    #         DBHOST: "influxdb"
-    #         DBPORT: "8086"
+    datahandler:    
+        build: 
+            context: .
+            dockerfile: components/data_handler/docker/Dockerfile
+        # image: data_handler:staging
+        depends_on:
+            - influxdb
+        environment:
+            ADDRESS: "influx.itu.dk"
+            PORT: "9001"
+            USER: "smartreader"
+            PASSWORD: "4mp3r3h0ur"
+            TOPIC: "IoT2020sec/meters"
+            DBHOST: "influxdb"
+            DBPORT: "8086"
 
     prediction:
         container_name: prediction

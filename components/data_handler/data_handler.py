@@ -21,6 +21,7 @@ def get_env_vars():
     Returns:
     dict: A dictionary with address, port, user, pass and topic.
     '''
+
     env = {
         "address": os.getenv("ADDRESS"),
         "port": os.getenv("PORT"),
@@ -118,7 +119,7 @@ def connect(env):
 if __name__ == "__main__":
     env = get_env_vars()
     dbclient = InfluxDBClient(host=env["dbhost"], port=int(env["dbport"]))
-    dbclient.create_database('pyexample')
-    dbclient.switch_database('pyexample')
+    dbclient.create_database('smartmeter')
+    dbclient.switch_database('smartmeter')
     connect(env)
 
