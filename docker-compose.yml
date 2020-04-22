@@ -11,7 +11,7 @@ services:
         volumes:
             # Data persistency
             # sudo mkdir -p /srv/docker/influxdb/data
-            - /srv/docker/influxdb/data:/var/lib/influxdb
+            - /g/srv/docker/influxdb/data:/var/lib/influxdb
     
     grafana:
         image: grafana/grafana:latest
@@ -27,7 +27,7 @@ services:
             # Data persistency
             # sudo mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
             - ./config/grafana.ini:/etc/grafana/grafana.ini
-            - /srv/docker/grafana/data:/var/lib/grafana
+            - /g/srv/docker/grafana/data:/var/lib/grafana
 
 
     datahandler:    

@@ -48,37 +48,24 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    # TODO
     '''
     Handles decoding messages and storing them in a database.
     '''
     c = BitArray(base64.b64decode(message.payload))
 
-    identifier = 0
-    timestamp = 0
-    reading = 0
-    # Fake data
-    if c[0] == 1:
-        identifier = c[1:7].int
-        print("Identifier: {}".format(identifier))
-        timestamp = c[8:40].int
-        print("Timestamp: {}".format(datetime.datetime.utcfromtimestamp(timestamp)))
-        reading = c[41:].int
-        print("Reading: {}".format(reading))
-    # Real data
-    else:
-        identifier = c[1:7].int
-        print("Identifier: {}".format(identifier))
-        timestamp = c[8:40].int
-        print("Timestamp: {}".format(timestamp))
-        reading = c[41:].int
-        print("Reading: {}".format(reading))
+    fakeData = c[0] # 1 bit
+    meterId = c[1:8].int # 7 bit
+    timestamp = c[8:40].int # 32 bit
+    reading = c[40:].int # 16 bit
+    weekday = datetime.datetime.fromtimestamp(timestamp).weekday()
 
     json_body = [
         {
             "measurement": "meterEvent",
             "tags": {
-                "meterId": identifier
+                "meterId": meterId,
+                "fakeData": fakeData,
+                "weekday": weekday
             },
             "time": datetime.datetime.utcfromtimestamp(timestamp),
             "fields": {
